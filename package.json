@@ -1,0 +1,23 @@
+{
+  "name": "grunt-deb",
+  "version": "0.2.0",
+  "description": "A grunt task that performs cross platform debian packaging",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "author": "Paul VARACHE",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulvarache/grunt-deb.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "fs-extra": "^0.22.1",
+    "debian-packaging": "^0.1.1"
+  }
+}

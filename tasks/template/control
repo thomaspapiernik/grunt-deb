@@ -1,0 +1,11 @@
+Source: <%= name %>
+Version: <%= version %>
+Maintainer: <%= maintainer %>
+Section: <%= category %>
+Priority: optional
+Standards-Version: 3.9.3
+Package: <%= name %>
+Architecture: <%= target_architecture %>
+Depends: <%= dependencies %>
+Description: <%= short_description %>
+<%= long_description %>
