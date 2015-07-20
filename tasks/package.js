@@ -73,6 +73,9 @@ module.exports = function (grunt) {
             fs.symlinkSync(this.data.links[i], path.join(options.data_dir, i));
         }
 
+        var long_description = options.long_description.replace(/\n/g, '\n ');
+        long_description = long_description.length ? ' ' + long_description : '';
+
         var controlVars = {
             data: {
                 name: options.name,
@@ -82,7 +85,7 @@ module.exports = function (grunt) {
                 target_architecture: options.target_architecture,
                 dependencies: options.dependencies.join(', '),
                 short_description: options.short_description,
-                long_description: ' ' + options.long_description.replace(/\n/g, '\n ')
+                long_description: long_description
             }
         };
 
