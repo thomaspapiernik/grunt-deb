@@ -89,21 +89,25 @@ module.exports = function (grunt) {
         var templateContent = grunt.file.read(path.join(options.template_dir, 'control'));
         grunt.file.write(path.join(options.control_dir, 'control'), grunt.template.process(templateContent, controlVars));
 
-        // copy package lifecycle scripts
-        var scripts = ['preinst', 'postinst', 'prerm', 'postrm'];
+        if (this.data.scripts) {
+            // copy package lifecycle scripts
+            var scripts = ['preinst', 'postinst', 'prerm', 'postrm'];
 
-        for (var j in scripts) {
-            if (this.data.scripts[scripts[j]]) {
-                var destination = path.join(options.control_dir, scripts[j]);
-                if (this.data.scripts[scripts[j]].src) {
-                    grunt.verbose.writeln(scripts[j] + ' script found');
-                    grunt.file.copy(this.data.scripts[scripts[j]].src, destination);
-                } else if (this.data.scripts[scripts[j]].content) {
-                    grunt.verbose.writeln('Creating ' + scripts[j]);
-                    grunt.file.write(destination, this.data.scripts[scripts[j]].content);
+            for (var j in scripts) {
+                if (this.data.scripts[scripts[j]]) {
+                    var destination = path.join(options.control_dir, scripts[j]);
+                    if (this.data.scripts[scripts[j]].src) {
+                        grunt.verbose.writeln(scripts[j] + ' script found');
+                        grunt.file.copy(this.data.scripts[scripts[j]].src, destination);
+                    } else if (this.data.scripts[scripts[j]].content) {
+                        grunt.verbose.writeln('Creating ' + scripts[j]);
+                        grunt.file.write(destination, this.data.scripts[scripts[j]].content);
+                    }
                 }
             }
         }
+
+
 
         var output_file = options.name + '_' + options.version + '-' + options.build_number + '_' + options.target_architecture + '.deb';
 
