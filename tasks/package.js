@@ -24,7 +24,8 @@ module.exports = function (grunt) {
                 target_architecture: "all",
                 category: "misc",
                 dependencies: [],
-                tmp_dir: '.tmp'
+                tmp_dir: '.tmp',
+                output: './output/'
             });
 
         if (!isValid(grunt, options)) {
@@ -66,7 +67,6 @@ module.exports = function (grunt) {
         }, '');
 
         grunt.file.write(path.join(options.control_dir, 'md5sum'), md5sumsContent);
-
 
         for (var i in this.data.links) {
             fs.mkdirpSync(path.dirname(path.join(options.data_dir, i)));
