@@ -90,7 +90,9 @@ module.exports = function (grunt) {
         };
 
         var templateContent = grunt.file.read(path.join(options.template_dir, 'control'));
-        grunt.file.write(path.join(options.control_dir, 'control'), grunt.template.process(templateContent, controlVars));
+            content = grunt.template.process(templateContent, controlVars);
+        content = content.replace(/^\s*[\r\n]/gm, '');
+        grunt.file.write(path.join(options.control_dir, 'control'), content);
 
         if (this.data.scripts) {
             // copy package lifecycle scripts
