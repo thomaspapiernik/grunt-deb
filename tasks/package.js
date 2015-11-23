@@ -107,6 +107,14 @@ module.exports = function (grunt) {
                     } else if (this.data.scripts[scripts[j]].content) {
                         grunt.verbose.writeln('Creating ' + scripts[j]);
                         grunt.file.write(destination, this.data.scripts[scripts[j]].content);
+                    } else if (this.data.scripts[scripts[j]].template) {
+                        grunt.verbose.writeln('Creating template' + scripts[j]);
+                        var templateProcessed = grunt.template.process(this.data.scripts[scripts[j]].content, controlVars);
+                        grunt.file.write(destination, templateProcessed);
+                    } else if (this.data.scripts[scripts[j]].templateSrc) {
+                        grunt.verbose.writeln('Creating template' + scripts[j]);
+                        var templateProcessed = grunt.template.process(grunt.file.read(this.data.scripts[scripts[j]].templateSrc), controlVars);
+                        grunt.file.write(destination, templateProcessed);
                     }
                 }
             }
