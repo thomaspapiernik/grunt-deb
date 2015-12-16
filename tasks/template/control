@@ -1,6 +1,7 @@
 Source: <%= name %>
 Version: <%= version %>
 Maintainer: <%= maintainer %>
+Uploaders: <%= uploaders %>
 Section: <%= category %>
 Priority: optional
 Standards-Version: 3.9.3

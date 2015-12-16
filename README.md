@@ -34,6 +34,7 @@ grunt.initConfig({
     deb_package: {
         options: {
             maintainer: "Paul Varache <perso@paulvarache.ninja>",
+            uploaders: [ { "name": "Thomas Papiernik", "email": "thomas.papiernik@gmail.com" } ]
             version: "1.0.0",
             name: "my-package",
             short_description: "short",
@@ -80,6 +81,12 @@ Type: `String`
 Default value: `process.env.DEBFULLNAME <process.env.DEBEMAIL>` or **package.json** `author.name <author.email>`
 
 This value defines the maintainer of the package.
+
+#### options.uploaders
+Type: `String`
+Default value: **package.json** `uploaders array { name, email }`
+
+This value defines the uploaders of the package. Take maintainers array from package.json
 
 #### options.version
 Type: `String`
