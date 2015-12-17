@@ -4,16 +4,20 @@ var deb = require('debian-packaging'),
     crypto = require('crypto'),
     isValid = require('../lib/checkOptions');
 
-var uploadersToList = function(uploaders) {
-    if (!uploaders && typeof uploaders !== 'Array') {
-        return '';
-    }
-    return uploaders.map(function(uploader) {
-        return (uploader.name ? uploader.name + (uploader.email ? ' <' + uploader.email + '>' : '') : uploader);
-    }).join(',');
-};
-
 module.exports = function (grunt) {
+
+    var uploadersToList = function(uploaders) {
+        if (!uploaders) {
+            return '';
+        }
+        if (!uploaders.map) {
+            return uploaders;
+        }
+
+        return uploaders.map(function(uploader) {
+            return (uploader.name ? uploader.name + (uploader.email ? ' <' + uploader.email + '>' : '') : uploader);
+        }).join(',');
+    };
 
     grunt.registerMultiTask('deb_package', function(){
 
