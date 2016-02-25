@@ -35,6 +35,7 @@ module.exports = function (grunt) {
                 long_description: (pkg.description && pkg.description.split(/\r\n|\r|\n/g).splice(1).join(' ')) || '',
                 version: pkg.version,
                 build_number: process.env.BUILD_NUMBER || process.env.DRONE_BUILD_NUMBER || process.env.TRAVIS_BUILD_NUMBER || '1',
+                revision: process.env.GIT_REVISION || process.env.SVN_REVISION || false,
                 target_architecture: "all",
                 category: "misc",
                 dependencies: [],
@@ -93,7 +94,7 @@ module.exports = function (grunt) {
         var controlVars = {
             data: {
                 name: options.name,
-                version: options.version,
+                version: options.version + (options.revision ? '_' + options.revision : ''),
                 maintainer: (options.maintainer.name ? options.maintainer.name + (options.maintainer.email ? ' <' + options.maintainer.email + '>' : '') : options.maintainer),
                 uploaders: uploadersToList(options.uploaders),
                 category: options.category,
@@ -129,7 +130,7 @@ module.exports = function (grunt) {
 
 
 
-        var output_file = options.name + '_' + options.version + '-' + options.build_number + '_' + options.target_architecture + '.deb';
+        var output_file = options.name + '_' + options.version + (options.revision ? '_' + options.revision : '') + '_' + options.build_number + '_' + options.target_architecture + '.deb';
 
         fs.mkdirpSync(options.output);
 

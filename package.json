@@ -1,6 +1,6 @@
 {
   "name": "grunt-deb",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A grunt task that performs cross platform debian packaging",
   "main": "Gruntfile.js",
   "scripts": {

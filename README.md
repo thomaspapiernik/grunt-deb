@@ -42,6 +42,7 @@ grunt.initConfig({
             target_architecture: "all",
             category: "devel",
             build_number: "1",
+            revision: "1",
             dependencies: [],           // List of the package dependencies
             tmp_dir: '.tmp',            // The task working dir
             output: './output/'         // Where your .deb should be created
@@ -117,6 +118,12 @@ Type: `String`
 Default value: `all`
 
 This value defines the architecture of the package.
+
+#### options.revision
+Type: `String`
+Default value: `process.env.GIT_REVISION || process.env.SVN_REVISION || false`
+
+This value defines the revision of the package (use in name and package version).
 
 #### options.build_number
 Type: `String`
