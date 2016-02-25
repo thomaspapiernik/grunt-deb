@@ -19,6 +19,15 @@ module.exports = function (grunt) {
         }).join(',');
     };
 
+    var cleanString = function(str, start) {
+        var result = str.replace('-', '_');
+        return addLeftString(str.replace('-', '_'), start);
+    };
+
+    var addLeftString = function(str, start) {
+        return (str.substr(0,1) == start ? str : start + str);
+    };
+
     grunt.registerMultiTask('deb_package', function(){
 
         var done = this.async();
@@ -94,7 +103,7 @@ module.exports = function (grunt) {
         var controlVars = {
             data: {
                 name: options.name,
-                version: options.version + (options.revision ? '_' + options.revision : ''),
+                version: options.version + '.'  + options.build_number + (options.revision ? addLeftString(options.revision, '-') : ''),
                 maintainer: (options.maintainer.name ? options.maintainer.name + (options.maintainer.email ? ' <' + options.maintainer.email + '>' : '') : options.maintainer),
                 uploaders: uploadersToList(options.uploaders),
                 category: options.category,
@@ -128,9 +137,7 @@ module.exports = function (grunt) {
             }
         }
 
-
-
-        var output_file = options.name + '_' + options.version + (options.revision ? '_' + options.revision : '') + '_' + options.build_number + '_' + options.target_architecture + '.deb';
+        var output_file = options.name + '_' + options.version + '_' + options.build_number + (options.revision ? cleanString(options.revision, '_') : '') + '_' + options.target_architecture + '.deb';
 
         fs.mkdirpSync(options.output);
 
